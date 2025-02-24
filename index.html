@@ -65,29 +65,11 @@
         <a href="https://www.gying.net/">观影酱</a>
         <a href="https://jrximey.github.io/2025-2-3/">作者主页</a>
     </div>
-    
-    <audio id="bgm" class="background-music" loop muted>
+
+    <audio class="background-music" autoplay loop>
         <source src="yyds.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-
-    <script>
-        // 用户首次点击页面时解除静音
-        document.addEventListener('click', function initAudio() {
-            const audio = document.getElementById('bgm');
-            audio.muted = false;
-            audio.play().catch(() => {});
-            document.removeEventListener('click', initAudio);
-        });
-
-        // 自动播放处理（需要用户已与页面交互过）
-        window.onload = function() {
-            const audio = document.getElementById('bgm');
-            audio.play().catch(error => {
-                console.log('自动播放被阻止，需要用户交互');
-            });
-        }
-    </script>
 
 </body>
 </html>

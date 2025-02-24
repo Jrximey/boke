@@ -66,10 +66,39 @@
         <a href="https://jrximey.github.io/2025-2-3/">作者主页</a>
     </div>
 
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 其他头部内容保持不变 -->
+</head>
+    
+<body>
+
+    <!-- 导航栏保持不变 -->
+
+    <!-- 修正后的音频标签 -->
     <audio id="bgm" class="background-music" loop muted>
         <source src="yyds.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    
+    <script>
+        // 用户首次点击页面时解除静音
+        document.addEventListener('click', function initAudio() {
+            const audio = document.getElementById('bgm');
+            audio.muted = false;
+            audio.play().catch(() => {});
+            document.removeEventListener('click', initAudio);
+        });
+
+        // 自动播放处理（需要用户已与页面交互过）
+        window.onload = function() {
+            const audio = document.getElementById('bgm');
+            audio.play().catch(error => {
+                console.log('自动播放被阻止，需要用户交互');
+            });
+        }
+    </script>
 
 </body>
 </html>

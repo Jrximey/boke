@@ -66,23 +66,28 @@
         <a href="https://jrximey.github.io/2025-2-3/">作者主页</a>
     </div>
 <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动播放音乐</title>
+</head>
+<body>
+    <h1>点击按钮播放音乐</h1>
+    <button id="playButton">播放音乐</button>
+
     <!-- 音频文件 -->
-    <audio id="audio" src="yyds.mp3"></audio>
+    <audio id="myAudio" src="your-music-file.mp3"></audio>
 
     <script>
-        // 获取音频元素
-        let audio = document.getElementById('audio');
+        // 获取按钮和音频元素
+        const playButton = document.getElementById('playButton');
+        const myAudio = document.getElementById('myAudio');
 
-        // 定义一个变量来存储 setTimeout 的 ID，用于取消重复触发
-        let playTimeout;
-
-        // 监听鼠标移动事件
-        document.body.addEventListener('mousemove', function() {
-            
-            playTimeout = setTimeout(() => {
-                audio.play();
-            }, 2000);
-        }, false);
+        // 添加按钮点击事件
+        playButton.addEventListener('click', () => {
+            // 播放音乐
+            myAudio.play();
+        });
     </script>
 </body>
 </html>

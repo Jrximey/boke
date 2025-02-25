@@ -11,7 +11,7 @@
             padding: 0;
             background-image: url('1740371019977.png'); /* 设置背景图片 */
             background-size: cover; /* 背景图片覆盖整个屏幕 */
-            background-position: center; /* 胃景图片居中 */
+            background-position: center; /* 背景图片居中 */
             background-repeat: no-repeat; /* 背景图片不重复 */
             display: flex;
             justify-content: center;
@@ -55,38 +55,69 @@
             z-index: 0;
             pointer-events: none;
         }
+        /* 新增音乐按钮样式 */
+        .music-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            border: 1px solid rgba(219, 219, 219, 0.8); /* 半透明边框 */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .music-button:hover {
+            background-color: rgba(239, 239, 239, 0.8); /* 悬停时的半透明背景 */
+        }
+        .music-button:active {
+            background-color: rgba(221, 221, 221, 0.8); /* 点击时的半透明背景 */
+        }
+        .music-icon {
+            font-size: 24px;
+            color: #262626;
+        }
     </style>
 </head>
 <body>
 
+    <!-- 音乐按钮 -->
+    <div class="music-button" id="musicButton">
+        <span class="music-icon" id="musicIcon">▶</span>
+    </div>
+
+    <!-- 导航栏 -->
     <div class="navbar">
         <a href="https://m.sunnafh.com/">视讯酱</a>
         <a href="https://www.kkys02.com/">可可酱</a>
         <a href="https://www.gying.net/">观影酱</a>
         <a href="https://jrximey.github.io/2025-2-3/">作者主页</a>
     </div>
-<body>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自动播放音乐</title>
-</head>
-<body>
-    <h1>点击按钮播放音乐</h1>
-    <button id="playButton">播放音乐</button>
 
-    <!-- 音频文件 -->
-    <audio id="myAudio" src="yyds.mp3"></audio>
+    <!-- 背景音乐 -->
+    <audio id="backgroundMusic" src="yyds.mp3" loop></audio>
 
     <script>
-        // 获取按钮和音频元素
-        const playButton = document.getElementById('playButton');
-        const myAudio = document.getElementById('myAudio');
+        // 获取音乐按钮和音频元素
+        const musicButton = document.getElementById('musicButton');
+        const musicIcon = document.getElementById('musicIcon');
+        const backgroundMusic = document.getElementById('backgroundMusic');
 
-        // 添加按钮点击事件
-        playButton.addEventListener('click', () => {
-            // 播放音乐
-            myAudio.play();
+        // 切换播放状态
+        musicButton.addEventListener('click', () => {
+            if (backgroundMusic.paused) {
+                // 如果音乐暂停，播放音乐并更新图标
+                backgroundMusic.play();
+                musicIcon.textContent = '❚❚';
+            } else {
+                // 如果音乐正在播放，暂停音乐并更新图标
+                backgroundMusic.pause();
+                musicIcon.textContent = '▶';
+            }
         });
     </script>
 </body>

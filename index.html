@@ -78,15 +78,10 @@
 
         // 监听鼠标移动事件
         document.body.addEventListener('mousemove', function() {
-            // 如果之前有设置的延迟，先清除
-            if (playTimeout) {
-                clearTimeout(playTimeout);
-            }
-
-            // 设置新的延迟
+            
             playTimeout = setTimeout(() => {
                 audio.play();
-            }, 200);
+            }, 2000);
         }, false);
     </script>
 </body>

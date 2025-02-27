@@ -9,7 +9,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('1740682768341.png');
+            background-image: url('1740682768341.png'); /* 设置背景图片 */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -124,25 +124,25 @@
 
         .particle {
             position: absolute;
-            width: calc(6px + 6 * var(--size));
-            height: calc(6px + 6 * var(--size));
-            background-color: rgba(255, 255, 255, 0.8);
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             opacity: 0;
-            animation: floatParticles var(--duration) infinite ease-in-out;
+            animation: floatParticles 5s infinite ease-in-out;
         }
 
         @keyframes floatParticles {
             0% {
                 transform: translateY(0);
-                opacity: 0.3;
+                opacity: 0.5;
             }
             50% {
-                transform: translateY(-60px);
+                transform: translateY(-50px);
                 opacity: 1;
             }
             100% {
-                transform: translateY(-120px);
+                transform: translateY(-100px);
                 opacity: 0;
             }
         }
@@ -173,6 +173,7 @@
     <audio id="backgroundMusic" src="yyds.mp3" loop></audio>
 
     <script>
+        // 获取元素
         const musicButton = document.getElementById('musicButton');
         const musicIcon = document.getElementById('musicIcon');
         const backgroundMusic = document.getElementById('backgroundMusic');
@@ -202,15 +203,14 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 生成增强版粒子特效
+        // 生成粒子特效
         function createParticles() {
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 20; i++) {
                 let particle = document.createElement('div');
                 particle.classList.add('particle');
                 particle.style.left = `${Math.random() * 100}vw`;
                 particle.style.top = `${Math.random() * 100}vh`;
-                particle.style.setProperty('--size', Math.random());
-                particle.style.setProperty('--duration', `${Math.random() * 4 + 3}s`);
+                particle.style.animationDuration = `${Math.random() * 5 + 3}s`;
                 particlesContainer.appendChild(particle);
             }
         }

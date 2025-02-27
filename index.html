@@ -16,12 +16,28 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column; /* 纵向排列 */
             height: 100vh;
             overflow: hidden;
         }
-        .navbar {
+
+        /* 时钟样式 */
+        .clock {
             background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
             border: 1px solid rgba(219, 219, 219, 0.8); /* 半透明边框 */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px 30px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #262626;
+            margin-bottom: 20px;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(219, 219, 219, 0.8);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -31,6 +47,7 @@
             position: relative;
             z-index: 1;
         }
+
         .navbar a {
             color: #262626;
             text-decoration: none;
@@ -38,47 +55,44 @@
             border-radius: 4px;
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
+
         .navbar a:hover {
-            background-color: rgba(239, 239, 239, 0.8); /* 半透明背景 */
+            background-color: rgba(239, 239, 239, 0.8);
             transform: scale(1.1);
         }
+
         .navbar a:active {
-            background-color: rgba(221, 221, 221, 0.8); /* 半透明背景 */
+            background-color: rgba(221, 221, 221, 0.8);
             transform: scale(0.95);
         }
-        .background-music {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-        /* 调整音乐按钮样式 */
+
+        /* 音乐按钮样式 */
         .music-button {
             position: absolute;
-            top: 10px; /* 距离顶部10px */
-            left: 10px; /* 距离左侧10px */
-            background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
-            border: 1px solid rgba(219, 219, 219, 0.8); /* 半透明边框 */
+            top: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(219, 219, 219, 0.8);
             border-radius: 50%;
-            width: 30px; /* 按钮直径30px */
-            height: 30px; /* 按钮直径30px */
+            width: 30px;
+            height: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .music-button:hover {
-            background-color: rgba(239, 239, 239, 0.8); /* 悬停时的半透明背景 */
+            background-color: rgba(239, 239, 239, 0.8);
         }
+
         .music-button:active {
-            background-color: rgba(221, 221, 221, 0.8); /* 点击时的半透明背景 */
+            background-color: rgba(221, 221, 221, 0.8);
         }
+
         .music-icon {
-            font-size: 16px; /* 图标大小调整为16px */
+            font-size: 16px;
             color: #262626;
         }
     </style>
@@ -89,6 +103,9 @@
     <div class="music-button" id="musicButton">
         <span class="music-icon" id="musicIcon">▶</span>
     </div>
+
+    <!-- 数字时钟 -->
+    <div class="clock" id="clock">00:00:00</div>
 
     <!-- 导航栏 -->
     <div class="navbar">
@@ -110,15 +127,27 @@
         // 切换播放状态
         musicButton.addEventListener('click', () => {
             if (backgroundMusic.paused) {
-                // 如果音乐暂停，播放音乐并更新图标
                 backgroundMusic.play();
                 musicIcon.textContent = '❚❚';
             } else {
-                // 如果音乐正在播放，暂停音乐并更新图标
                 backgroundMusic.pause();
                 musicIcon.textContent = '▶';
             }
         });
+
+        // 更新时钟
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // 每秒更新时钟
+        setInterval(updateClock, 1000);
+        updateClock(); // 立即更新一次，防止页面刚加载时显示00:00:00
     </script>
+
 </body>
 </html>
